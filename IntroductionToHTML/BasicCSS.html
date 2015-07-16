@@ -1,45 +1,110 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/BasicCSS.css">
-	<title>CSS Basics</title>
-</head>
-<body>
-<div>	
-	<ul>
-		<li>
-			<span class="tabSelected">News
-			</span>
-		</li>
-		<li>
-			<span>Subscribe
-			</span>
-		</li>
-	</ul>
-	<div class="innerDisplay col-11">
-		<div>
-			<span class="content col-6">
-				<h1>Welcome
-				</h1>
-				<p>Simple and effective AngularJS bindings for FusionCharts Javascript Library. Simple and effective AngularJS bindings for FusionCharts Javascript Library.
-				</p>
-				<p class="textBlue">Simple and effective AngularJS bindings for FusionCharts Javascript Library.
-				</p>
-				<div class="learnMore col-4">
-					<strong>LEARN MORE
-					</strong>
-			</div>	
-			</span>
-			<span class="content col-6">
-				<h2>Latest News
-				</h2>
-				<img src="Images/TimCook.jpg" width = 85% height =85%>
-				</img>
-				</div>
-			</span>
-		</div>
-	</div>
-</div>
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/BasicCSS.css">
+    <script src="javascript/myscript.js"></script> 
+    <title>Basic CSS</title>
+  </head>
+  <body onload="init()">
+    <ul id="tabs">
+      <li><a href="#about">News</a></li>
+      <li><a href="#advantages">Subscribe</a></li>
+    </ul>
+
+    <div class="tabContent" id="about">
+      <div>
+        <span class="content col-6">
+          <h1>Welcome
+          </h1>
+          <p>Simple and effective AngularJS bindings for FusionCharts Javascript Library. Simple and effective AngularJS bindings for FusionCharts Javascript Library.
+          </p>
+          <p class="textBlue">Simple and effective AngularJS bindings for FusionCharts Javascript Library.
+          </p>
+          <div class="learnMore col-4">
+            <strong>LEARN MORE
+            </strong>
+          </div>  
+        </span>
+        <span class="content col-6">
+          <h1>Latest News
+          </h1>
+          <img src="Images/TimCook.jpg" width = 100% height =75%>
+          </img>
+        </span>
+      </div>
+    </div>
+
+    <div class="tabContent" id="advantages">
+        <div>
+          <span class="content col-11">
+            <h1>Subscription Form
+            </h1>
+            <form>
+              <table cellpadding="10">
+                <tr>
+                  <td valign = "top"> Name
+                  </td>
+                  <td valign="top">
+                    <input type="text" name="name" id="txt_name" maxlength="30" size="20" align="left">
+                  </td>
+                  
+                  <td valign = "middle" colspan="4" align="right"> Country
+                  </td>
+                  <td>  
+                    <select name="country" id="txt_country">
+                      <option value="" selected></option>
+                      <option value="United States of America">United States of America</option>
+                      <option value="India">India</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td valign="top">Email Address
+                  </td>
+                  <td valign="top">
+                    <input  type="text" name="email" id="txt_email" maxlength="30" size="20">
+                  </td>
+                  
+                  <td valign="middle" colspan="4" align="right"> Address
+                  </td>
+                  <td  valign="top" rowspan="3">  
+                    <textarea rows="5" cols="25" name="address" id="txt_add">
+                    </textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Sex
+                  </td>
+                  <td valign="top">
+                    <input type="radio" id="male" value="Male">Male
+                    <input type="radio" id="female" value="Female">Female
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Interest
+                  </td>
+                  <td valign="top">
+                    <input type="checkbox" id="football" value="Football">Football
+                    <input type="checkbox" id="movie" value="Movie">Movie
+                    <input type="checkbox" id="reading" value="Reading">Reading
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="6" align="right">
+                    <input type="button" name="subscribe" value="SUBSCRIBE" onclick="processFormData();"></input>
+                  </td>
+                  <td align="left">
+                    <button type="reset" value="Reset">RESET</button>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </span>
+          
+        </div>
+      </div>
+  </body>
 </html>
