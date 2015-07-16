@@ -1,12 +1,10 @@
-@font-face{
-        font-family: myFont;
-        src: url(Fonts/OpenSans-Regular.ttf);
-}
 body{
-    font-family: myFont;
+    font-family: 'Open Sans';
+    
 }
 
 h1 {
+    
     color :#757575;
     font-size: 22px;
 }
