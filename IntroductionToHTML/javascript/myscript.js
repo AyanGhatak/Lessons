@@ -188,7 +188,7 @@ function phoneCheck(inputtxt)
   var phoneno = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
   document.getElementById("guide").innerHTML = "";
   if(inputtxt.value.match(phoneno)){
-    document.getElementById("txt_phone").style.border = "solid #717171";
+    document.getElementById("txt_phone").style.border = "1px solid #717171";
     document.getElementById("error_phone").style.visibility = "hidden";
     return true;
   }
