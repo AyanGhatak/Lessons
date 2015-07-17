@@ -2,11 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" type="text/css" href="css/BasicCSS.css">
-
-
-
     <script src="javascript/myscript.js"></script> 
     <title>Basic CSS</title>
   </head>
@@ -40,14 +36,15 @@
     </div>
 
     <div class="tabContent" id="advantages">
+        <div id="guide"></div>
         <div>
           <span class="content col-11">
             <h1>Subscription Form
             </h1>
-            <form>
+            <form name="subscribeForm" action="Login" method="post" onSubmit="return check(this)">
               <table cellpadding="10">
                 <tr>
-                  <td valign = "top"> Name
+                  <td valign = "top">Name
                   </td>
                   <td valign="top">
                     <input type="text" name="name" id="txt_name" maxlength="30" size="20" align="left">
@@ -56,7 +53,7 @@
                   <td valign = "middle" colspan="4" align="right"> Country
                   </td>
                   <td>  
-                    <select name="country" id="txt_country">
+                    <select name="country" id="txt_country" onBlur="countryCheck()">
                       <option value="" selected></option>
                       <option value="United States of America">United States of America</option>
                       <option value="India">India</option>
@@ -70,12 +67,12 @@
                   <td valign="top">
                     <input  type="text" name="email" id="txt_email" maxlength="30" size="20">
                   </td>
-                  
-                  <td valign="middle" colspan="4" align="right"> Address
-                  </td>
-                  <td  valign="top" rowspan="3">  
-                    <textarea rows="5" cols="25" name="address" id="txt_add">
-                    </textarea>
+                  <td td valign="middle" colspan="4" align="right">State
+                  </td>  
+                  <td>
+                    <select name="state" id="state" align="left">
+                      <option></option>
+                    </select>
                   </td>
                 </tr>
                 <tr>
@@ -85,14 +82,27 @@
                     <input type="radio" id="male" value="Male">Male
                     <input type="radio" id="female" value="Female">Female
                   </td>
+                  <td valign="middle" colspan="4" align="right"> Address
+                  </td>
+                  <td  valign="top" rowspan="3">  
+                    <textarea rows="4" cols="25" name="address" id="txt_add">
+                    </textarea>
+                  </td>
                 </tr>
                 <tr>
                   <td valign="top">Interest
                   </td>
                   <td valign="top">
-                    <input type="checkbox" id="football" value="Football">Football
-                    <input type="checkbox" id="movie" value="Movie">Movie
-                    <input type="checkbox" id="reading" value="Reading">Reading
+                    <input type="checkbox" name="checkbox1" id="football" value="Football">Football
+                    <input type="checkbox" name="checkbox2" id="movie" value="Movie" onBlur="moviesCheck()" >Movie
+                    <input type="checkbox" name="checkbox3" id="reading" value="Reading">Reading
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Phone
+                  </td>
+                  <td valign="top">
+                    <input  type="text" name="phone" id="txt_phone" size="15" onBlur="phoneCheck(document.subscribeForm.phone)">
                   </td>
                 </tr>
                 <tr>
@@ -109,6 +119,18 @@
           </span>
           
         </div>
+      </div>
+      <div id="error_phone">
+        <p> Please enter a valid Indian number. The formats can be 9883443344, 09883443344, 919883443344, 0919883443344, +919883443344, +91-9883443344, 0091-9883443344, +91 -9883443344, +91- 9883443344, +91 - 9883443344, 0091 - 9883443344</p>
+        <input type="button" id="phoneOK" name="O.K." value="Ok" onclick="hidePhone()"></input>
+      </div>
+      <div id="moviesType">
+        <p>Wow thats awesome watching movie works as a miracle when you are tired or want to have some extra fun.</p>
+        <P>Which kind of movie you like to watch the most?</P>
+        <input type="checkbox" id="horror" value="Horror">Horror
+        <input type="checkbox" id="animation" value="Animation">Animation
+        <input type="checkbox" id="romantic" value="Romantic">Romantic
+        <input type="button" id="moviesOK" name="O.K." value="Ok" onclick="hideMov()"></input>
       </div>
   </body>
 </html>

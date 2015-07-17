@@ -1,5 +1,7 @@
 var tabLinks = new Array();
 var contentDivs = new Array();
+var flag=0;
+
 
 function init() {
 
@@ -83,14 +85,19 @@ function checkEmail(email){
 function processFormData() { 
   var name_element = document.getElementById('txt_name');
   var country_element = document.getElementById('txt_country');
+  var state_element = document.getElementById('state');
   var email_element = document.getElementById('txt_email');
   var add_element = document.getElementById('txt_add');
   
   var name = name_element.value.trim();
   var country = country_element.value.trim();
+  var state = state_element.value.trim();
   var email = email_element.value.trim();
   var add = add_element.value,
-      sex, obj=new Object(), dataArr=new Array();
+      sex,
+      obj=new Object(),
+      dataArr=new Array(),
+      state;
 
   var error_message = 'The following fields had errors in them: \n\n';
   var data = 'You entered the following information: \n\n';
@@ -111,6 +118,9 @@ function processFormData() {
   } else {
     obj.country=country;
     data += 'Country: ' + country + '\n';
+    obj.state = state;
+    data += 'State: '+ state+'\n';
+      
   }
 
   if(!checkEmail(email)) {
@@ -133,22 +143,98 @@ function processFormData() {
   data += 'Sex: '+sex + "\n";
   obj.arr = new Array();
 
-  data += 'Interest: ';
+  data += 'Interest: \n';
   if (document.getElementById('football').checked) {
-    data += document.getElementById('football').value+ " ";
+    data += document.getElementById('football').value+ "\n";
     obj.arr.push(document.getElementById('football').value);
   }
   if (document.getElementById('movie').checked) {
-    data += document.getElementById('movie').value+ " ";
-    obj.arr.push(document.getElementById('football').value);
+    document.getElementById("moviesType").style.visibility = "visible";
+    data += "Movies :  ";
+    movType= new Array();
+    if (document.getElementById('horror').checked){
+      movType.push(document.getElementById('horror').value);
+      data += document.getElementById('horror').value + " "; 
+    }
+    if (document.getElementById('animation').checked){
+      movType.push(document.getElementById('animation').value);
+      data += document.getElementById('animation').value + " "; 
+    }
+    if (document.getElementById('romantic').checked){
+      movType.push(document.getElementById('romantic').value);
+      data += document.getElementById('romantic').value + " "; 
+    }
+    obj.arr.push(movType);
+    hideMov();
+    hidePhone();
+
   }
   if (document.getElementById('reading').checked) {
-    data += document.getElementById('reading').value+ " ";
+    data += "\n"+ document.getElementById('reading').value+ " ";
     obj.arr.push(document.getElementById('reading').value);
   }
   if(error_flag) {
     console.log(error_message);
-  } else {
+  }
+  else {
     console.log(data);
+    console.log("\n"+JSON.stringify(obj));
   }
 }
+
+
+function phoneCheck(inputtxt)  
+{
+  var phoneno = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
+  document.getElementById("guide").innerHTML = "";
+  if(inputtxt.value.match(phoneno)){
+    document.getElementById("txt_phone").style.border = "solid #717171";
+    document.getElementById("error_phone").style.visibility = "hidden";
+    return true;
+  }
+  else{ 
+    document.getElementById("txt_phone").style.border = "solid #FF0000";
+    document.getElementById("error_phone").style.visibility = "visible";
+    return false;
+  }
+}
+
+function moviesCheck()      
+{      
+  if(document.subscribeForm.checkbox2.checked == true){      
+    document.getElementById("moviesType").style.visibility = "visible";     
+  }      
+}   
+
+function hideMov(){
+      document.getElementById("moviesType").style.visibility = "hidden";  
+}
+
+function hidePhone(){
+      document.getElementById("error_phone").style.visibility = "hidden";  
+}
+function countryCheck(){
+  
+  var country_element = document.getElementById('txt_country'); 
+  var country = country_element.value.trim();
+  var select = document.getElementById("state");
+  var options = [{},{}];
+  options[0].name = "United States of America";
+  options[0].state = ["California","Texas","Virginia","Florida","Arizona"];
+  options[1].name = "India";
+  options[1].state = ["West Bengal","Bihar","Karnataka","Andhra Pradesh","Assam"];
+  for(var i = 0; i < options.length; i++) {
+    if(options[i].name === country){
+      for(var j=0; j< options[i].state.length; j++){
+
+        var opt = options[i].state[j];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+      }
+    }
+  }
+} 
+
+

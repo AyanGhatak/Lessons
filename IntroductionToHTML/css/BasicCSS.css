@@ -11,7 +11,7 @@ h1 {
 
 button {
     position: relative;
-    bottom: -8px;
+    bottom: 9px;
     padding:7px;
     font-size: 110%;
     color: #FFF;
@@ -24,7 +24,7 @@ button {
 
 input[type=button] {
     position: relative;
-    bottom: -8px;
+    bottom: 9px;
     padding:5px 15px;
     font-size: 110%;
     color: #FFF;
@@ -64,14 +64,14 @@ input[type=button] {
     font-size: 13.81px;
     color: #6e6e6e;
     z-index: -1;
-    height : 250px;
+    height : 275px;
     padding: 1%;
     margin: 1%;
 }
 .learnMore{
     position: relative;
     left : 30%;
-    bottom: -64px;
+    bottom: -90px;
     text-align: center;
     vertical-align: middle;
     color: #FFF;
@@ -133,9 +133,9 @@ div.tabContent{
     position: relative;
     top: -8px;
     z-index: 1;
-    width: 800px;
+    width: 850px;
     background-color: #e4efff;
-    height: 300px;
+    height: 310px;
     padding : 30px;
     margin: 30px;
     border: 1px solid #bdcdee;
@@ -146,4 +146,40 @@ div.tabContent.hide {
     display: none;
 }
 
-
+#error_phone{
+    position: absolute;
+    vertical-align: middle;
+    background-color: #e4efff;
+    top :10%;
+    left: 5%;
+    z-index: 2;
+    text-align: center;
+    width: 60%;
+    height: 15%;
+    border: 2px solid #000;
+    visibility: hidden;
+}
+#moviesType{
+    vertical-align: middle;
+    background-color: #e4efff;
+    position: absolute;
+    padding: 1%;
+    top :10%;
+    left: 5%;
+    z-index: 2;
+    text-align: center;
+    width: 60%;
+    height: 30%;
+    
+    visibility: hidden;
+}
+#moviesOK{
+    position: relative;
+    left: 20%;
+    bottom: -50px;
+}
+#state{
+    vertical-align: middle;
+    width: 150px;
+   
+}
