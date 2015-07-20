@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<style type="text/css">
+		.display{
+			position: relative;
+			border: 1px;
+			float: left;
+			width: 7%;
+			text-align: center;
+			margin: 0.5%;
+			
+		}
+		
+		input[id*='result']{
+			width: 50%;
+			text-align: center;
+			border: transparent;
+			
+		}
+		p[id*='sign']{
+			text-align: left;
+		}
+	</style>
+	<title>Math operations</title>
+	
+</head>
+<body>
+	
+	<div>
+	<button onclick="initial()">Generate values</button>
+	<button onclick="add()">Addition</button>
+	<button onclick="subtract()">Subtraction</button>
+	</div>
+	<p id="disp"></p>
+
+
+	
+</body>
+<script>
+	var n=50;
+	var n1=new Array(n),n2=new Array(n),n3=new Array(n);
+	function initial(){
+		var output = document.getElementById('disp');
+	    output.innerHTML='';
+	    var i=1;
+	    var val="";
+	    while(i<=n)
+	    {
+	    	var ele = document.createElement("div");
+	       	ele.setAttribute("class","display");
+	       	child = document.createElement("p");
+	       	child.setAttribute("id","a"+i);
+	       	ele.appendChild(child);
+	       	
+	       	child = document.createElement("p");
+	       	child.setAttribute("id","b"+i);
+	       	ele.appendChild(child);
+
+	       	child = document.createElement("p");
+	       	child.setAttribute("id","sign"+i);
+	       	ele.appendChild(child);
+
+	       	child = document.createElement("hr");
+	       	child.setAttribute("width","50%");
+	       	ele.appendChild(child);
+
+	       	var inp = document.createElement("input");
+	        inp.setAttribute("type","text");
+			inp.setAttribute("id","result"+i);
+			inp.setAttribute("onkeyup","processResult(this)");
+	       	
+	       	ele.appendChild(inp);
+
+	       	child = document.createElement("hr");
+	       	child.setAttribute("width","50%");
+	       	ele.appendChild(child);
+
+	       	output.appendChild(ele);
+
+	       	n1[i]=Math.round(10000*Math.random(),0);
+	       	n2[i]=Math.round(10000*Math.random(),0);
+	       	document.getElementById("a"+i).innerHTML = ""+n1[i];
+			document.getElementById("b"+i).innerHTML = ""+n2[i];
+	       	i++;
+	    }
+	};
+
+	function add() {
+		for(var j=1;j<=n;j++){
+			document.getElementById("result"+j).value="";
+			document.getElementById("result"+j).style.backgroundColor="#FFF";
+		}
+		for(var i=1;i<=n;i++){
+			n3[i]=n1[i]+n2[i];
+			document.getElementById("sign"+i).innerHTML = "+";
+		}
+		
+	}
+	function subtract() {
+		for(var j=1;j<=n;j++){
+			document.getElementById("result"+j).value="";
+			document.getElementById("result"+j).style.backgroundColor="#FFF";
+		}
+		for(var i=1;i<=n;i++){
+			n3[i]=n1[i]-n2[i];
+			document.getElementById("sign"+i).innerHTML = "-";
+		}
+		
+	}
+	function processResult(result_element) {
+		for(i=1;i<=n;i++){
+			if(result_element.getAttribute("id") == ("result"+i)){
+				if (typeof result_element.selectionStart == "number") {
+	  				result_element.selectionStart = result_element.selectionEnd = 0;
+	  				if(result_element.value === n3[i].toString()){
+						result_element.style.backgroundColor = "#0F0";
+					}
+					else{
+						result_element.style.backgroundColor = "#F00";
+					}
+				}		
+			}
+		}
+		
+	}
+	
+
+
+</script>
+</html>
