@@ -29,10 +29,16 @@
 <body>
 	
 	<div>
+	<h1 align="center">Practice Maths</h1>
+	<h4 align="center">Generate practice sets, select addition or subtraction and start the test</h4>
 	<button onclick="initial()">Generate practice Sets</button>
-	<button onclick="add()">Addition</button>
+	<button onclick="addition()">Addition</button>
 	<button onclick="subtract()">Subtraction</button>
 	</div>
+	<h2><time>00:00:00</time></h2>
+	<button id="start">Start Test</button>
+	<button id="stop">Stop Test</button>
+	<button id="clear">Reset Time</button>
 	<p id="disp"></p>
 
 
@@ -87,7 +93,7 @@
 	    }
 	};
 
-	function add() {
+	function addition() {
 		for(var j=1;j<=n;j++){
 			document.getElementById("result"+j).value="";
 			document.getElementById("result"+j).style.backgroundColor="#FFF";
@@ -96,6 +102,8 @@
 			n3[i]=n1[i]+n2[i];
 			document.getElementById("sign"+i).innerHTML = "+";
 		}
+		
+
 		
 	}
 	function subtract() {
@@ -124,6 +132,42 @@
 			}
 		}
 		
+	}
+
+	var h2 = document.getElementsByTagName('h2')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
+	function add() {
+	    seconds++;
+	    if (seconds >= 60) {
+	        seconds = 0;
+	        minutes++;
+	        if (minutes >= 60) {
+	            minutes = 0;
+	            hours++;
+	        }
+	    }
+	    
+	    h2.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+	    timer();
+	}
+	function timer() {
+	    t = setTimeout(add, 1000);
+	}
+	start.onclick = timer;
+
+	stop.onclick = function() {
+	    clearTimeout(t);
+	}
+
+	clear.onclick = function() {
+	    h2.textContent = "00:00:00";
+	    seconds = 0; minutes = 0; hours = 0;
 	}
 	
 
