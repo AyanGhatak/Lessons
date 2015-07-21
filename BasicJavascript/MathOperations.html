@@ -22,6 +22,7 @@
 		p[id*='sign']{
 			text-align: left;
 		}
+		
 	</style>
 	<title>Math operations</title>
 	
@@ -30,14 +31,11 @@
 	
 	<div>
 	<h1 align="center">Practice Maths</h1>
-	<h4 align="center">Generate practice sets, select addition or subtraction and start the test</h4>
-	<button onclick="initial()">Generate practice Sets</button>
-	<button onclick="addition()">Addition</button>
-	<button onclick="subtract()">Subtraction</button>
+	<button onclick="addition()">Generate Addition Problems</button>
+	<button onclick="subtract()">Generate Subtraction Problems</button>
 	</div>
-	<h2><time>00:00:00</time></h2>
-	<button id="start">Start Test</button>
-	<button id="stop">Stop Test</button>
+	<h2 align="center"><time>00:00:00</time></h2>
+	<button id="stop">End Test</button>
 	<button id="clear">Reset Time</button>
 	<p id="disp"></p>
 
@@ -45,7 +43,15 @@
 	
 </body>
 <script>
-	var n=50;
+	var n=50,
+		counter = 0;
+	var h2 = document.getElementsByTagName('h2')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
 	var n1=new Array(n),n2=new Array(n),n3=new Array(n);
 	function initial(){
 		var output = document.getElementById('disp');
@@ -94,6 +100,9 @@
 	};
 
 	function addition() {
+		h2.textContent = "00:00:00";
+	    seconds = 0; minutes = 0; hours = 0;
+		initial();
 		for(var j=1;j<=n;j++){
 			document.getElementById("result"+j).value="";
 			document.getElementById("result"+j).style.backgroundColor="#FFF";
@@ -102,11 +111,12 @@
 			n3[i]=n1[i]+n2[i];
 			document.getElementById("sign"+i).innerHTML = "+";
 		}
-		
-
-		
+		timer();
 	}
 	function subtract() {
+		h2.textContent = "00:00:00";
+	    seconds = 0; minutes = 0; hours = 0;
+		initial();
 		for(var j=1;j<=n;j++){
 			document.getElementById("result"+j).value="";
 			document.getElementById("result"+j).style.backgroundColor="#FFF";
@@ -115,6 +125,7 @@
 			n3[i]=n1[i]-n2[i];
 			document.getElementById("sign"+i).innerHTML = "-";
 		}
+		timer();
 		
 	}
 	function processResult(result_element) {
@@ -124,6 +135,7 @@
 	  				result_element.selectionStart = result_element.selectionEnd = 0;
 	  				if(result_element.value === n3[i].toString()){
 						result_element.style.backgroundColor = "#0F0";
+						counter++;
 					}
 					else{
 						result_element.style.backgroundColor = "#F00";
@@ -134,13 +146,7 @@
 		
 	}
 
-	var h2 = document.getElementsByTagName('h2')[0],
-    start = document.getElementById('start'),
-    stop = document.getElementById('stop'),
-    clear = document.getElementById('clear'),
-    seconds = 0, minutes = 0, hours = 0,
-    t;
-
+	
 	function add() {
 	    seconds++;
 	    if (seconds >= 60) {
@@ -159,10 +165,11 @@
 	function timer() {
 	    t = setTimeout(add, 1000);
 	}
-	start.onclick = timer;
-
+	
 	stop.onclick = function() {
 	    clearTimeout(t);
+	    h2.textContent=" Your Score was "+counter+"/50 in "+hours+"hrs "+minutes+"mins "+seconds+"secs!!"
+
 	}
 
 	clear.onclick = function() {
