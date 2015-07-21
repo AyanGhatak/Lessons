@@ -22,6 +22,9 @@
 		p[id*='sign']{
 			text-align: left;
 		}
+		h2, #stop, #clear{
+			visibility: hidden;
+		}
 		
 	</style>
 	<title>Math operations</title>
@@ -31,8 +34,8 @@
 	
 	<div>
 	<h1 align="center">Practice Maths</h1>
-	<button onclick="addition()">Generate Addition Problems</button>
-	<button onclick="subtract()">Generate Subtraction Problems</button>
+	<button onclick="addition()">Practice Addition</button>
+	<button onclick="subtract()">Practice Subtraction</button>
 	</div>
 	<h2 align="center"><time>00:00:00</time></h2>
 	<button id="stop">End Test</button>
@@ -44,13 +47,13 @@
 </body>
 <script>
 	var n=50,
-		counter = 0;
-	var h2 = document.getElementsByTagName('h2')[0],
-    start = document.getElementById('start'),
-    stop = document.getElementById('stop'),
-    clear = document.getElementById('clear'),
-    seconds = 0, minutes = 0, hours = 0,
-    t;
+		counter = 0,
+		h2 = document.getElementsByTagName('h2')[0],
+		
+		stop = document.getElementById('stop'),
+		clear = document.getElementById('clear'),
+		seconds = 0, minutes = 0, hours = 0,
+		t;
 
 	var n1=new Array(n),n2=new Array(n),n3=new Array(n);
 	function initial(){
@@ -97,9 +100,13 @@
 			document.getElementById("b"+i).innerHTML = ""+n2[i];
 	       	i++;
 	    }
+	    
 	};
 
 	function addition() {
+		stop.style.visibility = "visible";
+		clear.style.visibility = "visible";
+		h2.style.visibility = "visible";
 		h2.textContent = "00:00:00";
 	    seconds = 0; minutes = 0; hours = 0;
 		initial();
@@ -111,9 +118,13 @@
 			n3[i]=n1[i]+n2[i];
 			document.getElementById("sign"+i).innerHTML = "+";
 		}
+		
 		timer();
 	}
 	function subtract() {
+		stop.style.visibility = "visible";
+		clear.style.visibility = "visible";
+		h2.style.visibility = "visible";
 		h2.textContent = "00:00:00";
 	    seconds = 0; minutes = 0; hours = 0;
 		initial();
@@ -168,7 +179,11 @@
 	
 	stop.onclick = function() {
 	    clearTimeout(t);
-	    h2.textContent=" Your Score was "+counter+"/50 in "+hours+"hrs "+minutes+"mins "+seconds+"secs!!"
+	    h2.textContent=" Your Score was "+counter+"/50 in "+hours+"hrs "+minutes+"mins "+seconds+"secs!!";
+	    stop.style.visibility = "hidden";
+		clear.style.visibility = "hidden";
+	    var output = document.getElementById('disp');
+	    output.innerHTML='\n \nThank you Visit us again!';
 
 	}
 
