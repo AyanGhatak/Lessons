@@ -195,7 +195,7 @@
 <script type="text/javascript">
         // Get all the keys from document
     var keys = document.querySelectorAll('#calculator span');
-    var operators = ['+', '-', 'x', '/'];
+    var operators = ['+', '-', 'x', '/','%'];
     var decimalAdded = false;
     var mem=0;
 
@@ -370,7 +370,6 @@
                         break;
                 case 6: n1=equation.substring(0,operator_pos);
                         n2=equation.substring(operator_pos+3,equation.length);
-                        //alert(parseFloat(n2));
                         return (parseFloat(n1)%parseFloat(n2));
                         break;
 
