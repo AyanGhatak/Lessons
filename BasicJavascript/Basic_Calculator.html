@@ -195,7 +195,7 @@
 <script type="text/javascript">
         // Get all the keys from document
     var keys = document.querySelectorAll('#calculator span');
-    var operators = ['+', '-', 'x', '÷'];
+    var operators = ['+', '-', 'x', '/'];
     var decimalAdded = false;
     var mem=0;
 
@@ -206,8 +206,6 @@
             var input = document.querySelector('.screen');
             var inputVal = input.innerHTML;
             var btnVal = this.innerHTML;
-            //alert(btnVal)
-            debugger;
             // Now, just append the key values (btnValue) to the input string and finally use javascript's eval function to get the result
             // If clear key is pressed, erase everything
             
@@ -279,7 +277,7 @@
            		mem=0;
           	}
            	else if(btnVal === 'MR'){
-           		input.innerHTML= ""+mem;
+           		input.innerHTML+= mem;
            	}
            	else if(btnVal === 'M+'){
            		mem = evaluate(mem+"+"+input.innerHTML);
@@ -287,10 +285,6 @@
            	else if(btnVal === 'M-'){
            		mem = evaluate(mem+"-"+input.innerHTML);
            	}
-           /*	else if(btnVal == '%'){
-           		input.innerHTML += btnVal;
-           		mem = evaluate(input.innerHTML);
-           	}*/
             // if any other key is pressed, just append it
             else {
                 input.innerHTML += btnVal;
