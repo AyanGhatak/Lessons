@@ -360,10 +360,16 @@
                 			}
                 			j--;
                 		}
-                		//alert(j);
-                		n1=equation.substring(0,j);
-                        n2=equation.substring(j+1,i-1);
-                        return evaluate(n1+prev_sign+evaluate(evaluate(n2+"*"+n1)+"/100"));
+                		if(prev_sign === '+' || prev_sign === '-'){
+                            n1=equation.substring(0,j);
+                            n2=equation.substring(j+1,i-1);
+                            return evaluate(n1+prev_sign+evaluate(evaluate(n2+"*"+n1)+"/100"));
+                        }
+                        else{
+                            n1=equation.substring(0,j);
+                            n2=equation.substring(j+1,i-1);
+                            return evaluate(n1+prev_sign+evaluate(n2+"/100"));    
+                        }
                         break;
                 case 6: n1=equation.substring(0,operator_pos);
                         n2=equation.substring(operator_pos+3,equation.length);
