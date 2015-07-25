@@ -88,7 +88,7 @@
 		var basic_container = document.createElement('div');
 		basic_container.id="basic_container";
 		basic_container.style.width="26%";
-		basic_container.style.height="55%";
+		basic_container.style.height="65%";
 		basic_container.style.border="1px solid #000";
 		basic_container.style.position="relative";
 		basic_container.style.top="1%";
