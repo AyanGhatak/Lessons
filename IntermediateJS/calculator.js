@@ -176,6 +176,32 @@
 				left : "",
 				padding : "",
 				classname : ""			
+			},
+			dateTime_container1 : {
+				width : "90%",
+				height : "40%",
+				position : "relative",
+				margin : "1%",
+				display : "",
+				floating : "",
+				borders : "",
+				top : "",
+				left : "",
+				padding : "",
+				classname : ""	
+			},
+			dateTime_container11 : {
+				width : "29%",
+				height : "80%",
+				position : "relative",
+				margin : "1%",
+				display : "",
+				floating : "left",
+				borders : "",
+				top : "",
+				left : "",
+				padding : "1%",
+				classname : ""	
 			}
 		};
 		info.Date_Time_Calculator = info.Basic_Calculator;
@@ -185,6 +211,14 @@
 		info.Months = info.Description;
 		info.Interest = info.Description;
 		info.EMI = info.Description;
+
+		info.dateTime_container2 = info.dateTime_container1;
+		info.dateTime_container12 = info.dateTime_container11;
+		info.dateTime_container13 = info.dateTime_container11;
+		info.dateTime_container21 = info.dateTime_container11;
+		info.dateTime_container22 = info.dateTime_container11;
+		info.dateTime_container23 = info.dateTime_container11;
+
 
 		info.text1 = info.text;
 		info.text2 = info.text;
@@ -423,24 +457,11 @@
 
 		for(var i=1 ;i<=2;i++){
 			
-			var newDiv = document.createElement('div');
-			newDiv.id="dateTime_container"+i;
-			newDiv.style.width="90%";
-			newDiv.style.height="40%";
-			newDiv.style.position="relative";
-			newDiv.style.margin="1%";		
+			var newDiv = create_div_element("dateTime_container"+i);
 			display.appendChild(newDiv);
 			
 			for(var j=1;j<=3;j++){
-				newDiv = document.createElement('div');
-				newDiv.id="dateTime_container"+i+j;
-				newDiv.style.width="29%";
-				newDiv.style.height="80%";
-				newDiv.style.position="relative";
-				newDiv.style.margin="1%";
-				newDiv.style.cssFloat="left";		
-				newDiv.style.padding = "1%";
-				document.getElementById("dateTime_container"+i).appendChild(newDiv);
+				document.getElementById("dateTime_container"+i).appendChild(create_div_element("dateTime_container"+i+j));
 				if(i === 2 && j === 2){
 					interval_format(i,j);
 				}
@@ -696,6 +717,10 @@
 		        	t = document.createTextNode("Incomplete Data");
 		    		document.getElementById("mortgage_container").appendChild(t);
 		        }		
+			})
+
+			case 'basic' : return (function(){
+				
 			})	
 		}
 	}
