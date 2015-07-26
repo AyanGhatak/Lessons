@@ -2,74 +2,216 @@
 	
 	initial();
 	function initial(){
-		var display = document.createElement('div');
-		var contain = document.createElement('div');
-		contain.id = 'container';
-		contain.className = 'container';
+		
+		var contain = create_div_element('container');
 		document.getElementsByTagName('body')[0].appendChild(contain);
-		document.getElementById("container").style.width = "60%";
-		document.getElementById("container").style.height = "80%";
-		document.getElementById("container").style.position = "absolute";
-
-		var choice = document.createElement('div');
-		choice.id = "choice";
-		choice.className = 'choice';
+		
+		var choice = create_div_element("choice");
 		contain.appendChild(choice);
-		document.getElementById("choice").style.width = "95%";
-		document.getElementById("choice").style.height = "10%";
-		document.getElementById("choice").style.position = "relative";
-		document.getElementById("choice").style.margin = "1%";
 
-		var radio1 = document.createElement("INPUT");
-		radio1.id="radio1";
-		radio1.setAttribute("type", "radio");
-		radio1.name="calculator_type";
-		radio1.value="Basic";
-		radio1.addEventListener("change",check);
-		choice.appendChild(radio1);
-		var t = document.createTextNode("Basic Calculator");
-	    choice.appendChild(t);
-	    
-		var radio2 = document.createElement("INPUT");
-		radio2.id="radio2";
-		radio2.setAttribute("type", "radio");
-		radio2.name="calculator_type";
-		radio2.value="Date Time";
-		radio2.addEventListener("change",check);
-		choice.appendChild(radio2);
-		t = document.createTextNode("Date and Time Calculator");
-	    choice.appendChild(t);
-	    
-		var radio3 = document.createElement("INPUT");
-		radio3.id="radio3";
-		radio3.setAttribute("type", "radio");
-		radio3.name="calculator_type";
-		radio3.value="Mortgage";
-		radio3.addEventListener("change",check);
-		choice.appendChild(radio3);
-		t = document.createTextNode("Mortgage Calculator");
-	    choice.appendChild(t);
-
-		display.id = "display";
-		display.className = 'display';
-		contain.appendChild(display);
-		document.getElementById("display").style.width = "95%";
-		document.getElementById("display").style.height = "85%";
-		document.getElementById("display").style.position = "relative";
-		document.getElementById("display").style.margin = "1%";
+		var radio_name = ["Basic_Calculator","Date_Time_Calculator","Mortgage_Calculator"];
+		for(i=0;i<3;i++){
+			choice.appendChild(create_input_element(radio_name[i]));
+			choice.appendChild(document.createTextNode(radio_name[i]));
+		}
+		contain.appendChild(create_div_element("display"));
 	}
 	
+	function create_div_element(name){
+		var newDiv = document.createElement('div'),
+			style_obj = get_detail(name);
+		newDiv.id= name;
+		newDiv.innerHTML = style_obj.display,
+		newDiv.style.width = style_obj.width,
+		newDiv.style.height= style_obj.height,
+		newDiv.style.position = style_obj.position,
+		newDiv.style.margin = style_obj.margin,
+		newDiv.style.cssFloat= style_obj.floating;
+		newDiv.style.border = style_obj.borders;
+		newDiv.style.top = style_obj.top;
+		newDiv.style.left = style_obj.left;
+		newDiv.style.padding = style_obj.padding;
+		newDiv.className = style_obj.classname;
+		return newDiv;
+	}
+
+	function create_input_element(name){
+		var newInput = document.createElement('input'),
+			input_obj = get_detail(name);
+		newInput.id = name;
+		newInput.setAttribute('type', input_obj.type);
+		newInput.setAttribute('value', input_obj.value);
+		newInput.setAttribute('name',input_obj.name);
+		newInput.addEventListener(input_obj.eventListener.type , input_obj.eventListener.action);
+		return newInput;
+	}
+
+	function get_detail(name){
+		var info = {
+			Basic_Calculator : {
+				type : 'radio',
+				value : 'Calculate',
+				eventListener : {
+					type : 'click',
+					action : check
+				},
+				name : "calculator_type"	
+			},
+			display : {
+				width : "95%",
+				height : "85%",
+				position : "relative",
+				margin : "1%",
+				display : "",
+				floating : "",
+				borders : "",
+				top : "",
+				left : "",
+				padding : "",
+				classname : ""	
+			},
+			basic_container : {
+				width : "26%",
+				height : "65%",
+				position : "relative",
+				margin : "1%",
+				display : "",
+				floating : "",
+				borders : "1px solid #000",
+				top : "1%",
+				left : "25%",
+				padding : "",
+				classname : ""
+			},
+			top_screen : {
+				width : "95%",
+				height : "10%",
+				position : "relative",
+				margin : "1%",
+				display : "",
+				floating : "",
+				borders : "1px solid #000",
+				top : "1%",
+				left : "0%",
+				padding : "",
+				classname : ""
+			},
+			button : {
+				width : "13%",
+				height : "5.5%",
+				position : "relative",
+				margin : "0.5%",
+				display : name,
+				floating : "left",
+				borders : "1px solid #000",
+				top : "",
+				left : "",
+				padding : "5%",
+				classname : "calculator_buttons"	
+			},
+			mortgage_container : {
+				width : "97%",
+				height : "50%",
+				position : "relative",
+				margin : "1%",
+				display : "",
+				floating : "left",
+				borders : "",
+				top : "",
+				left : "",
+				padding : "",
+				classname : ""
+			},
+			Description: {
+				width : "97%",
+				height : "12%",
+				position : "relative",
+				margin : "1%",
+				display : name,
+				floating : "left",
+				borders : "",
+				top : "",
+				left : "",
+				padding : "",
+				classname : ""	
+			},
+			text : {
+				type : 'number',
+				value : '',
+				eventListener: {},
+				name : ''
+			},
+			calculate_button : {
+				type : 'button',
+				value : 'Calculate',
+				eventListener : {
+					type : 'click',
+					action : calculate('mortgage')
+				},
+				name : ""
+			},
+
+			container : {
+				width : "60%",
+				height : "80%",
+				position : "absolute",
+				margin : "0%",
+				display : "",
+				floating : "",
+				borders : "",
+				top : "",
+				left : "",
+				padding : "",
+				classname : ""	
+			},
+			choice : {
+				width : "95%",
+				height : "10%",
+				position : "relative",
+				margin : "1%",
+				display : "",
+				floating : "",
+				borders : "",
+				top : "",
+				left : "",
+				padding : "",
+				classname : ""			
+			}
+		};
+		info.Date_Time_Calculator = info.Basic_Calculator;
+		info.Mortgage_Calculator = info.Basic_Calculator;
+
+		info.Loan = info.Description;
+		info.Months = info.Description;
+		info.Interest = info.Description;
+		info.EMI = info.Description;
+
+		info.text1 = info.text;
+		info.text2 = info.text;
+		info.text3 = info.text;
+		info.text4 = info.text;
+
+		var arr = ["MC","M+","M-","MR","CLS","CAN","REM","%","7","8","9","+","4","5","6","-","1","2","3","/","0",".","=","X"];
+		for(var i=0;i< arr.length;i++){
+			if(arr[i] === name){
+				return info.button;
+			}
+		}
+
+		return info[name];
+	}
+
 	function check(){
 
-		if(document.getElementById("radio1").checked){
+		if(document.getElementById("Basic_Calculator").checked){
 			remove("display");
-    		basicCalculator();
+    		basicCalculator(display);
 		}
-		if(document.getElementById("radio2").checked){
+		if(document.getElementById("Date_Time_Calculator").checked){
 			remove("display");
-    		dateCalculator();
+    		dateCalculator(display);
 		}
-		if(document.getElementById("radio3").checked){
+		if(document.getElementById("Mortgage_Calculator").checked){
 			remove("display");
 	    	mortageCalculator(display);
 		}	
@@ -85,41 +227,13 @@
 	function basicCalculator(){
 		
 		var names = ["","MC","M+","M-","MR","CLS","CAN","REM","%","7","8","9","+","4","5","6","-","1","2","3","/","0",".","=","X"];
-		var basic_container = document.createElement('div');
-		basic_container.id="basic_container";
-		basic_container.style.width="26%";
-		basic_container.style.height="65%";
-		basic_container.style.border="1px solid #000";
-		basic_container.style.position="relative";
-		basic_container.style.top="1%";
-		basic_container.style.left="25%";
-		basic_container.style.margin="1%";		
+		var basic_container = create_div_element("basic_container");
 		display.appendChild(basic_container);
-
-		var top_screen = document.createElement('div');
-		top_screen.id="top_screen";
-		top_screen.style.width="95%";
-		top_screen.style.height="10%";
-		top_screen.style.border="1px solid #000";
-		top_screen.style.position="relative";
-		top_screen.style.padding="1%";
-		top_screen.style.top="1%";
-		top_screen.style.margin="1%";		
+		var top_screen = create_div_element("top_screen");
 		basic_container.appendChild(top_screen);
 
 		for(var i=1; i<=24;i++){
-			var newDiv = document.createElement('div');
-			newDiv.id="buttons"+i;
-			newDiv.className="calculator_buttons"
-			newDiv.style.width="13%";
-			newDiv.style.height="5.5%";
-			newDiv.style.border="1px solid #000";
-			newDiv.style.position="relative";
-			newDiv.style.margin="0.5%";	
-			newDiv.style.padding="5%";		
-			newDiv.style.cssFloat="left";
-			newDiv.innerHTML=names[i];
-			basic_container.appendChild(newDiv);
+			basic_container.appendChild(create_div_element(names[i]));
 		}
 
 		var keys = document.querySelectorAll('.calculator_buttons');
@@ -308,6 +422,7 @@
 	function dateCalculator(){
 
 		for(var i=1 ;i<=2;i++){
+			
 			var newDiv = document.createElement('div');
 			newDiv.id="dateTime_container"+i;
 			newDiv.style.width="90%";
@@ -538,77 +653,51 @@
 	}
 
 	function mortageCalculator(){
-		var mortgage_container = document.createElement('div');
-		mortgage_container.id="mortgage_container";
-		mortgage_container.style.width="97%";
-		mortgage_container.style.height="50%";
-		mortgage_container.style.position="relative";
-		mortgage_container.style.margin="1%";		
-		display.appendChild(mortgage_container);
-		
-			
-		var names = [" Description: "," Loan Amount: "," Months: "," Interest Rate: "," Monthly Payment: "];
-		newDiv = document.createElement('div');
-		newDiv.style.width="97%";
-		newDiv.style.height="12%";
-		newDiv.style.position="relative";
-		newDiv.style.margin="1%";		
-		newDiv.style.cssFloat="left";
-		newDiv.innerHTML = names[0];
-		mortgage_container.appendChild(newDiv);
+
+		var names = ["Description","Loan","Months","Interest","EMI"];
+		mortgage_container_ele = create_div_element("mortgage_container");
+		display.appendChild(mortgage_container_ele);	
+		mortgage_container_ele.appendChild(create_div_element(names[0]));
 
 		for(var i=1; i<5; i++){
-			newDiv = document.createElement('div');
-			newDiv.style.width="97%";
-			newDiv.style.height="12%";
-			newDiv.style.position="relative";
-			newDiv.style.margin="1%";		
-			newDiv.style.cssFloat="left";
-			newDiv.innerHTML = names[i];
 
-			var newDiv2 = document.createElement("input");
-			newDiv2.id = "text"+i;
-			newDiv2.setAttribute('type', 'number');
-			newDiv2.setAttribute('value','');
-			newDiv.appendChild(newDiv2);
-			mortgage_container.appendChild(newDiv);
+			name_ele = create_div_element(names[i]);
+			name_ele.appendChild(create_input_element("text"+i));
+			mortgage_container_ele.appendChild(name_ele);			
 		}
 		document.getElementById("text3").value = 10;
 		document.getElementById("text3").disabled = true;
-		var btn = document.createElement("input");
-		btn.setAttribute('type', 'button');
-		btn.setAttribute('value','Calculate');
-		btn.addEventListener("click",calculate_mortgage);
-		mortgage_container.appendChild(btn);
-
-		function calculate_mortgage(){
-		var princ = parseFloat(document.getElementById("text1").value),
-			term = parseFloat(document.getElementById("text2").value),
-			intr = parseFloat(document.getElementById("text3").value)/1200,
-			emi = parseFloat(document.getElementById("text4").value);
-
-			
-
-		if(princ!=0 && term!=0 && intr!=0)
-        {
-            document.getElementById("text4").value = Math.round(princ * intr * Math.pow((1+intr),term)/ ((Math.pow((1+intr),term))-1));
-         
-
-        }
-
-        else if(emi!=0 && term!=0 && intr!=0)
-         {
-            document.getElementById("text1").value = Math.round(emi * ((Math.pow(1+intr,term))-1)/(intr*(Math.pow((1+intr),term)))); 
-        }
-        else if(emi!=0 && princ!=0 && intr!=0)
-         {
-            document.getElementById("text2").value = Math.round((Math.log((emi)/(emi-(princ*intr))))/(Math.log(1+intr))); 
-        }
-        else{
-            mortgage_container.innerHTML = 'Incomplete Data!!'; 
-        }		
-	}
+		
+		mortgage_container_ele.appendChild(create_input_element("calculate_button"));
 	}
 
+	function calculate(id){
+		switch(id){
+			case 'mortgage' : return (function(){
+				var princ = parseFloat(document.getElementById("text1").value),
+				term = parseFloat(document.getElementById("text2").value),
+				intr = parseFloat(document.getElementById("text3").value)/1200,
+				emi = parseFloat(document.getElementById("text4").value);
+
+				if(!isNaN(princ) && !isNaN(term) && !isNaN(intr))
+		        {
+		            document.getElementById("text4").value = Math.round(princ * intr * Math.pow((1+intr),term)/ ((Math.pow((1+intr),term))-1));
+		        }
+
+		        else if(!isNaN(emi) && !isNaN(term) && !isNaN(intr))
+		         {
+		            document.getElementById("text1").value = Math.round(emi * ((Math.pow(1+intr,term))-1)/(intr*(Math.pow((1+intr),term)))); 
+		        }
+		        else if(!isNaN(emi) && !isNaN(princ) && !isNaN(intr))
+		         {
+		            document.getElementById("text2").value = Math.round((Math.log((emi)/(emi-(princ*intr))))/(Math.log(1+intr))); 
+		        }
+		        else{
+		        	t = document.createTextNode("Incomplete Data");
+		    		document.getElementById("mortgage_container").appendChild(t);
+		        }		
+			})	
+		}
+	}
 })();
 
