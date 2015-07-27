@@ -150,7 +150,24 @@
 				},
 				name : ""
 			},
-
+			Get_Difference: {
+				type : 'button',
+				value : 'Get_Difference',
+				eventListener : {
+					type : 'click',
+					action : calculate('diff_calc')
+				},
+				name : ""	
+			},
+			Add_Interval: {
+				type : 'button',
+				value : 'Add_Interval',
+				eventListener : {
+					type : 'click',
+					action : calculate('processAdd')
+				},
+				name : ""	
+			},
 			container : {
 				width : "60%",
 				height : "80%",
@@ -485,19 +502,10 @@
 			ele.appendChild(mybr);
 
 			if(i === 1){
-				var result = document.createElement("input");
-				result.setAttribute('type', 'button');
-				result.setAttribute('value', 'Get Difference');
-				result.onclick = diff_calc;
-				ele.appendChild(result);
-
+				ele.appendChild(create_input_element('Get_Difference'));
 			}
 			else{
-				var result_add = document.createElement("input");
-				result_add.setAttribute('type', 'button');
-				result_add.setAttribute('value', 'Add Interval');
-				result_add.onclick = processAdd;
-				ele.appendChild(result_add);
+				ele.appendChild(create_input_element('Add_Interval'));
 
 				var result_sub = document.createElement("input");
 				result_sub.setAttribute('type', 'button');
@@ -515,15 +523,6 @@
 			var para= document.createElement("p");
 			para.id="disp_result"+i;
 			ele.appendChild(para);
-		}
-
-		function diff_calc(){
-			alert('diff date');
-		    var firstDate = new Date(document.getElementById("date11").value.substring(6,10),document.getElementById("date11").value.substring(0,2),document.getElementById("date11").value.substring(3,5),document.getElementById("time11").value.substring(0,2),document.getElementById("time11").value.substring(3,5));
-		    var secondDate = new Date(document.getElementById("date12").value.substring(6,10),document.getElementById("date12").value.substring(0,2),document.getElementById("date12").value.substring(3,5),document.getElementById("time12").value.substring(0,2),document.getElementById("time12").value.substring(3,5));
-		    var diff = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())));
-		    document.getElementById('disp_result1').innerHTML=process(diff);
-		    return false;
 		}
 
 		function interval_format(i,j){
@@ -584,44 +583,6 @@
 			input_mins.setAttribute('placeholder', 'Minutes');
 			ele.appendChild(input_mins);
 
-		}
-
-		function process(ms){
-			var onemin=60*1000;
-			var onehr= 60*onemin;
-			var oneday=24*onehr;
-			var onemonth=30*oneday;
-			var oneyear=365*oneday;
-			
-			var yr= Math.round(ms/oneyear);
-			var month=Math.round((ms-(oneyear*yr))/(onemonth));
-			var day= Math.round((ms-(oneyear*yr)-(month*onemonth))/(oneday));
-			var hr= Math.round((ms-(oneyear*yr)-(month*onemonth)-(oneday*day))/(onehr));
-			var min=Math.round((ms-(oneyear*yr)-(month*onemonth)-(oneday*day)-(hr*onehr))/(onemin));
-
-			return (yr+" years "+month+" month "+day+" days "+hr+" hours "+min+" minutes "); 
-		}
-
-
-		function newDate(){
-	    	var years=(document.getElementById("years").value)*24*60*60*1000*365,
-	        	months=(document.getElementById("months").value)*30*24*60*60*1000, 
-	        	days=((document.getElementById("days").value))*24*60*60*1000,
-	        	hours=((document.getElementById("hours").value))*60*60*1000,
-	        	minutes=((document.getElementById("mins").value))*60*1000;
-
-	    	return (years+months+days+hours+minutes);
-		}
-
-		function processAdd(){
-		    var change = newDate();
-		    var firstDate2 = new Date(parseInt(document.getElementById("date21").value.substring(6,10)),(parseInt(document.getElementById("date21").value.substring(0,2))),parseInt(document.getElementById("date21").value.substring(3,5)),parseInt(document.getElementById("time21").value.substring(0,2)),parseInt(document.getElementById("time21").value.substring(3,5)));
-		    var a= (change+firstDate2.getTime());
-		   
-		    var changeDate = new Date(a);
-		    document.getElementById('disp_result2').innerHTML= changeDate.toString() ;
-		    alert(changeDate.toString());
-		 
 		}
 		function processSub(){
 		    var change = newDate();
@@ -693,6 +654,33 @@
 	}
 
 	function calculate(id){
+		
+		function process(ms){
+			var onemin=60*1000;
+			var onehr= 60*onemin;
+			var oneday=24*onehr;
+			var onemonth=30*oneday;
+			var oneyear=365*oneday;
+			
+			var yr= Math.round(ms/oneyear);
+			var month=Math.round((ms-(oneyear*yr))/(onemonth));
+			var day= Math.round((ms-(oneyear*yr)-(month*onemonth))/(oneday));
+			var hr= Math.round((ms-(oneyear*yr)-(month*onemonth)-(oneday*day))/(onehr));
+			var min=Math.round((ms-(oneyear*yr)-(month*onemonth)-(oneday*day)-(hr*onehr))/(onemin));
+
+			return (yr+" years "+month+" month "+day+" days "+hr+" hours "+min+" minutes "); 
+		}
+
+		function newDate(){
+	    	var years=(document.getElementById("years").value)*24*60*60*1000*365,
+	        	months=(document.getElementById("months").value)*30*24*60*60*1000, 
+	        	days=((document.getElementById("days").value))*24*60*60*1000,
+	        	hours=((document.getElementById("hours").value))*60*60*1000,
+	        	minutes=((document.getElementById("mins").value))*60*1000;
+
+	    	return (years+months+days+hours+minutes);
+		}
+
 		switch(id){
 			case 'mortgage' : return (function(){
 				var princ = parseFloat(document.getElementById("text1").value),
@@ -719,8 +707,21 @@
 		        }		
 			})
 
-			case 'basic' : return (function(){
-				
+			case 'diff_calc' : return (function(){
+				var firstDate = new Date(document.getElementById("date11").value.substring(6,10),document.getElementById("date11").value.substring(0,2),document.getElementById("date11").value.substring(3,5),document.getElementById("time11").value.substring(0,2),document.getElementById("time11").value.substring(3,5));
+			    var secondDate = new Date(document.getElementById("date12").value.substring(6,10),document.getElementById("date12").value.substring(0,2),document.getElementById("date12").value.substring(3,5),document.getElementById("time12").value.substring(0,2),document.getElementById("time12").value.substring(3,5));
+			    var diff = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())));
+			    document.getElementById('disp_result1').innerHTML=process(diff);
+			    return false;				
+			})
+
+			case 'processAdd' : return (function(){
+				var change = newDate();
+			    var firstDate2 = new Date(parseInt(document.getElementById("date21").value.substring(6,10)),(parseInt(document.getElementById("date21").value.substring(0,2))),parseInt(document.getElementById("date21").value.substring(3,5)),parseInt(document.getElementById("time21").value.substring(0,2)),parseInt(document.getElementById("time21").value.substring(3,5)));
+			    var a= (change+firstDate2.getTime());
+			   
+			    var changeDate = new Date(a);
+			    document.getElementById('disp_result2').innerHTML= changeDate.toString() ;	
 			})	
 		}
 	}
