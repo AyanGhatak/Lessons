@@ -43,6 +43,7 @@
 		newInput.setAttribute('value', input_obj.value);
 		newInput.setAttribute('name',input_obj.name);
 		newInput.addEventListener(input_obj.eventListener.type , input_obj.eventListener.action);
+		newInput.setAttribute('placeholder', input_obj.placeholder);
 		return newInput;
 	}
 
@@ -55,7 +56,8 @@
 					type : 'click',
 					action : check
 				},
-				name : "calculator_type"	
+				name : "calculator_type",
+				placeholder : ""	
 			},
 			display : {
 				width : "95%",
@@ -139,7 +141,8 @@
 				type : 'number',
 				value : '',
 				eventListener: {},
-				name : ''
+				name : '',
+				placeholder : ""
 			},
 			calculate_button : {
 				type : 'button',
@@ -148,7 +151,8 @@
 					type : 'click',
 					action : calculate('mortgage')
 				},
-				name : ""
+				name : "",
+				placeholder : ""
 			},
 			Get_Difference: {
 				type : 'button',
@@ -157,7 +161,8 @@
 					type : 'click',
 					action : calculate('diff_calc')
 				},
-				name : ""	
+				name : "",
+				placeholder : ""	
 			},
 			Add_Interval: {
 				type : 'button',
@@ -166,7 +171,67 @@
 					type : 'click',
 					action : calculate('processAdd')
 				},
-				name : ""	
+				name : "",
+				placeholder : ""	
+			},
+			Subtract_Interval: {
+				type : 'button',
+				value : 'Subtract_Interval',
+				eventListener : {
+					type : 'click',
+					action : calculate('processSub')
+				},
+				name : "",
+				placeholder : ""	
+			},
+			years : {
+				type : 'text',
+				value : '',
+				eventListener : {},
+				name : "",
+				placeholder : "Years"		
+			},
+			months : {
+				type : 'text',
+				value : '',
+				eventListener : {},
+				name : "",
+				placeholder : "Months"	
+			},
+			days : {
+				type : 'text',
+				value : '',
+				eventListener : {},
+				name : "",
+				placeholder : "Days"
+			},
+			hours : {
+				type : 'text',
+				value : '',
+				eventListener : {},
+				name : "",
+				placeholder : "Hours"	
+			},
+			mins : {
+				type : 'text',
+				value : '',
+				eventListener : {},
+				name : "",
+				placeholder : "Minutes"	
+			},
+			date : {
+				type : 'text',
+				value : '',
+				eventListener : {},
+				name : "",
+				placeholder : "mm-dd-yyyy"	
+			},
+			time : {
+				type : 'text',
+				value : '',
+				eventListener : {},
+				name : "",
+				placeholder : "hh:mm"		
 			},
 			container : {
 				width : "60%",
@@ -236,6 +301,16 @@
 		info.dateTime_container22 = info.dateTime_container11;
 		info.dateTime_container23 = info.dateTime_container11;
 
+		info.time11 = info.time;
+		info.time12 = info.time;
+		info.time21 = info.time;
+		info.time22 = info.time;
+		
+
+		info.date11 = info.date;
+		info.date12 = info.date;
+		info.date21 = info.date;
+		info.date22 = info.date;
 
 		info.text1 = info.text;
 		info.text2 = info.text;
@@ -506,13 +581,7 @@
 			}
 			else{
 				ele.appendChild(create_input_element('Add_Interval'));
-
-				var result_sub = document.createElement("input");
-				result_sub.setAttribute('type', 'button');
-				result_sub.setAttribute('value', 'Subtract Interval');
-				result_sub.onclick = processSub;
-				ele.appendChild(result_sub);
-
+				ele.appendChild(create_input_element('Subtract_Interval'));
 			}
 			
 			mybr = document.createElement('br');
@@ -536,65 +605,30 @@
 			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 			
-			var input_year = document.createElement("input");
-			input_year.id = "years";
-			input_year.setAttribute('type', 'text');
-			input_year.setAttribute('value', '');
-			input_year.setAttribute('placeholder', 'Years');
-			ele.appendChild(input_year);
+			ele.appendChild(create_input_element("years"));
 
 			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 
-			var input_month = document.createElement("input");
-			input_month.id = "months";
-			input_month.setAttribute('type', 'text');
-			input_month.setAttribute('value', '');
-			input_month.setAttribute('placeholder', 'Months');
-			ele.appendChild(input_month);
+			ele.appendChild(create_input_element("months"));
 
 			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 
-			var input_days = document.createElement("input");
-			input_days.id="days";
-			input_days.setAttribute('type', 'text');
-			input_days.setAttribute('value', '');
-			input_days.setAttribute('placeholder', 'Days');
-			ele.appendChild(input_days);
+			ele.appendChild(create_input_element("days"));
 
 			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 
-			var input_hours = document.createElement("input");
-			input_hours.id="hours";
-			input_hours.setAttribute('type', 'text');
-			input_hours.setAttribute('value', '');
-			input_hours.setAttribute('placeholder', 'Hours');
-			ele.appendChild(input_hours);
+			ele.appendChild(create_input_element("hours"));
 
 			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 
-			var input_mins = document.createElement("input");
-			input_mins.id="mins";
-			input_mins.setAttribute('type', 'text');
-			input_mins.setAttribute('value', '');
-			input_mins.setAttribute('placeholder', 'Minutes');
-			ele.appendChild(input_mins);
+			ele.appendChild(create_input_element("mins"));
 
 		}
-		function processSub(){
-		    var change = newDate();
-		    var firstDate2 = new Date(parseInt(document.getElementById("date21").value.substring(6,10)),(parseInt(document.getElementById("date21").value.substring(0,2))),parseInt(document.getElementById("date21").value.substring(3,5)),parseInt(document.getElementById("time21").value.substring(0,2)),parseInt(document.getElementById("time21").value.substring(3,5)));
-		    var a= (firstDate2.getTime()-change);
-		    var changeDate = new Date(a);
-		    document.getElementById('disp_result2').innerHTML= changeDate.toString() ;
-		    alert(changeDate.toString());
-		 
-		}
 
-		
 		function start_end_date_format(i,j){
 			var ele = document.getElementById("dateTime_container"+i+j);
 			
@@ -609,12 +643,7 @@
 			t=document.createTextNode("Date : ");
 			ele.appendChild(t);
 			
-			var input_date = document.createElement("input");
-			input_date.id="date"+i+j;
-			input_date.setAttribute('type', 'text');
-			input_date.setAttribute('value', '');
-			input_date.setAttribute('placeholder', 'mm-dd-yyyy');
-			ele.appendChild(input_date);
+			ele.appendChild(create_input_element("date"+i+j));
 			
 			mybr = document.createElement('br');
 			ele.appendChild(mybr);
@@ -624,12 +653,7 @@
 			t=document.createTextNode("Time : ");
 			ele.appendChild(t);
 			
-			var input_time = document.createElement("input");
-			input_time.id="time"+i+j;
-			input_time.setAttribute('type', 'text');
-			input_time.setAttribute('value', '');
-			input_time.setAttribute('placeholder', 'hh:mm');
-			ele.appendChild(input_time);
+			ele.appendChild(create_input_element("time"+i+j));
 			
 		}	
 	}
@@ -722,6 +746,14 @@
 			   
 			    var changeDate = new Date(a);
 			    document.getElementById('disp_result2').innerHTML= changeDate.toString() ;	
+			})
+
+			case 'processSub' : return (function(){
+				var change = newDate();
+			    var firstDate2 = new Date(parseInt(document.getElementById("date21").value.substring(6,10)),(parseInt(document.getElementById("date21").value.substring(0,2))),parseInt(document.getElementById("date21").value.substring(3,5)),parseInt(document.getElementById("time21").value.substring(0,2)),parseInt(document.getElementById("time21").value.substring(3,5)));
+			    var a= (firstDate2.getTime()-change);
+			    var changeDate = new Date(a);
+			    document.getElementById('disp_result2').innerHTML= changeDate.toString() ;
 			})	
 		}
 	}
