@@ -346,7 +346,7 @@
 	function remove(id){
 		var element = document.getElementById(""+id);
 		while(element.hasChildNodes()){
-			element.removeChild(element.firstChild)
+			element.removeChild(element.firstChild);
 		}
 	}
 
@@ -367,7 +367,7 @@
 	    var decimalAdded = false;
 	    var mem=0;
 	    // Add onclick event to all the keys and perform operations
-	    for(var i = 0; i < keys.length; i++) {
+	    for(i = 0; i < keys.length; i++) {
 	        keys[i].onclick = function(e) {
 	            // Get the input and button values
 	            var input = document.querySelector('#top_screen');
@@ -410,11 +410,11 @@
 	                var lastChar = inputVal[inputVal.length - 1];
 	                
 	                // Only add operator if input is not empty and there is no operator at the last
-	                if(inputVal != '' && operators.indexOf(lastChar) == -1) 
+	                if(inputVal !== '' && operators.indexOf(lastChar) === -1) 
 	                    input.innerHTML += btnVal;
 	                
 	                // Allow minus if the string is empty
-	                else if(inputVal == '' && btnVal == '-') 
+	                else if(inputVal === '' && btnVal === '-') 
 	                    input.innerHTML += btnVal;
 	                
 	                // Replace the last operator (if exists) with the newly pressed operator
@@ -459,7 +459,7 @@
 	            
 	            // prevent page jumps
 	            e.preventDefault();
-	        }
+	        };
 	        function evaluate(equation){
 	            var result=0, eq_arr=equation.split('');
 	            var operator_value=0,operator_pos=0;
@@ -498,19 +498,19 @@
 	                case 1: n1=equation.substring(0,operator_pos);
 	                        n2=equation.substring(operator_pos+1,equation.length);
 	                        return (parseFloat(n1)+parseFloat(n2));
-	                        break;
+	                        
 	                case 2: n1=equation.substring(0,operator_pos);
 	                        n2=equation.substring(operator_pos+1,equation.length);
 	                        return (parseFloat(n1)-parseFloat(n2));
-	                        break;
+	                        
 	                case 3: n1=equation.substring(0,operator_pos);
 	                        n2=equation.substring(operator_pos+1,equation.length);
 	                        return (parseFloat(n1)*parseFloat(n2));
-	                        break;
+	                        
 	                case 4: n1=equation.substring(0,operator_pos);
 	                        n2=equation.substring(operator_pos+1,equation.length);
 	                        return (parseFloat(n1)/parseFloat(n2));
-	                        break;
+	                        
 	                case 5: j=i;
 	                        var prev_sign='';
 	                        while(j>0){
@@ -538,7 +538,7 @@
 	                case 6: n1=equation.substring(0,operator_pos);
 	                        n2=equation.substring(operator_pos+3,equation.length);
 	                        return (parseFloat(n1)%parseFloat(n2));
-	                        break;
+	                        
 
 	            }
 	        }
@@ -573,7 +573,7 @@
 
 			var mybr = document.createElement('br');
 			ele.appendChild(mybr);
-			var mybr = document.createElement('br');
+			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 
 			if(i === 1){
@@ -635,9 +635,9 @@
 			var t= document.createTextNode((j == 2) ? "End Date" : "Start Date");
 			ele.appendChild(t);
 			
-			var mybr = document.createElement('br');
+			mybr = document.createElement('br');
 			ele.appendChild(mybr);
-			var mybr = document.createElement('br');
+			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 			
 			t=document.createTextNode("Date : ");
@@ -647,7 +647,7 @@
 			
 			mybr = document.createElement('br');
 			ele.appendChild(mybr);
-			var mybr = document.createElement('br');
+			mybr = document.createElement('br');
 			ele.appendChild(mybr);
 			
 			t=document.createTextNode("Time : ");
@@ -729,7 +729,7 @@
 		        	t = document.createTextNode("Incomplete Data");
 		    		document.getElementById("mortgage_container").appendChild(t);
 		        }		
-			})
+			});
 
 			case 'diff_calc' : return (function(){
 				var firstDate = new Date(document.getElementById("date11").value.substring(6,10),document.getElementById("date11").value.substring(0,2),document.getElementById("date11").value.substring(3,5),document.getElementById("time11").value.substring(0,2),document.getElementById("time11").value.substring(3,5));
@@ -737,7 +737,7 @@
 			    var diff = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())));
 			    document.getElementById('disp_result1').innerHTML=process(diff);
 			    return false;				
-			})
+			});
 
 			case 'processAdd' : return (function(){
 				var change = newDate();
@@ -746,7 +746,7 @@
 			   
 			    var changeDate = new Date(a);
 			    document.getElementById('disp_result2').innerHTML= changeDate.toString() ;	
-			})
+			});
 
 			case 'processSub' : return (function(){
 				var change = newDate();
@@ -754,7 +754,7 @@
 			    var a= (firstDate2.getTime()-change);
 			    var changeDate = new Date(a);
 			    document.getElementById('disp_result2').innerHTML= changeDate.toString() ;
-			})	
+			});	
 		}
 	}
 })();
