@@ -108,7 +108,7 @@
 			$arrlength = count($interest);
 			$myFile = "records.csv";
 			$fh = fopen($myFile, 'a') or die("can't open file");
-			fwrite($fh, $name."\n");
+			fwrite($fh, "\n".$name."\n");
 			fwrite($fh, $email."\n");
 			fwrite($fh, $mobile."\n");
 			fwrite($fh, $sex."\n");
@@ -192,7 +192,7 @@
 					<tr>
 						<td><span>Interest</span><span class="error" value="<?php echo $error;?>">* <?php echo $interestErr;?></span></td>
 						<td>
-							<input type="checkbox" name="interest[]" value="Games" id="cb1" onchange='overlay(1,this.checked);' <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Games'){echo "checked";}} ?>>&nbsp<span>Games</span>&nbsp
+							<input type="checkbox" name="interest[]" value="Games" id="cb1"  <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Games'){echo "checked";}} ?>>&nbsp<span>Games</span>&nbsp
 	  						<input type="checkbox" name="interest[]" value="Movie" id="cb2" ' <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Movie'){echo "checked";}} ?>>&nbsp<span>Movie</span>&nbsp
 	  						<input type="checkbox" name="interest[]" value="Reading" id="cb3" ' <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Reading'){echo "checked";}} ?>>&nbsp<span>Reading</span>
   						</td>
