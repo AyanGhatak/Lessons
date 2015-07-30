@@ -1,5 +1,5 @@
-var tabLinks = [];
-var contentDivs = [];
+var tabLinks = new Array();
+var contentDivs = new Array();
 var flag=0;
 
 
@@ -8,15 +8,15 @@ function init() {
   // Grab the tab links and content divs from the page
   var tabListItems = document.getElementById('tabs').childNodes;
 
-  for ( i = 0; i < tabListItems.length; i++ ) {
+  for ( var i = 0; i < tabListItems.length; i++ ) {
     
     if ( tabListItems[i].nodeName == "LI" ) {
 
       var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
-      var id1 = getHash( tabLink.getAttribute('href') );
+      var id = getHash( tabLink.getAttribute('href') );
       
-      tabLinks[id1] = tabLink;
-      contentDivs[id1] = document.getElementById( id );
+      tabLinks[id] = tabLink;
+      contentDivs[id] = document.getElementById( id );
     }
   }
 
@@ -26,16 +26,16 @@ function init() {
 
   for ( var id in tabLinks ) {
     tabLinks[id].onclick = showTab;
-    tabLinks[id].onfocus = function() { this.blur();};
-    if ( i === 0 ) tabLinks[id].className = 'selected';
+    tabLinks[id].onfocus = function() { this.blur() };
+    if ( i == 0 ) tabLinks[id].className = 'selected';
     i++;
   }
 
   // Hide all content divs except the first
-  i = 0;
+  var i = 0;
 
-  for ( id in contentDivs ) {
-    if ( i !== 0 ) contentDivs[id].className = 'tabContent hide';
+  for ( var id in contentDivs ) {
+    if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
     i++;
   }
 }
@@ -95,16 +95,16 @@ function processFormData() {
   var email = email_element.value.trim();
   var add = add_element.value,
       sex,
-      obj={},
-      dataArr= [];
-     
+      obj=new Object(),
+      dataArr=new Array(),
+      state;
 
   var error_message = 'The following fields had errors in them: \n\n';
   var data = 'You entered the following information: \n\n';
 
   var error_flag = false;
   
-  if(name === '') {
+  if(name == '') {
     error_message += 'Name: Please enter your name\n';
     error_flag = true;
   } else {
@@ -112,7 +112,7 @@ function processFormData() {
     data += 'Name: ' + name + '\n';
   }
 
-  if(country === '') {
+  if(country == '') {
     error_message += 'Country: Please enter your country\n';
     error_flag = true;
   } else {
@@ -141,7 +141,7 @@ function processFormData() {
   }
   obj.sex=sex;
   data += 'Sex: '+sex + "\n";
-  obj.arr = {};
+  obj.arr = new Array();
 
   data += 'Interest: \n';
   if (document.getElementById('football').checked) {
@@ -151,7 +151,7 @@ function processFormData() {
   if (document.getElementById('movie').checked) {
     document.getElementById("moviesType").style.visibility = "visible";
     data += "Movies :  ";
-    movType= [];
+    movType= new Array();
     if (document.getElementById('horror').checked){
       movType.push(document.getElementById('horror').value);
       data += document.getElementById('horror').value + " "; 
@@ -201,7 +201,7 @@ function phoneCheck(inputtxt)
 
 function moviesCheck()      
 {      
-  if(document.subscribeForm.checkbox2.checked === true){      
+  if(document.subscribeForm.checkbox2.checked == true){      
     document.getElementById("moviesType").style.visibility = "visible";     
   }      
 }   
@@ -236,5 +236,4 @@ function countryCheck(){
     }
   }
 } 
-
 
