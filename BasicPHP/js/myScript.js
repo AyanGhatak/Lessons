@@ -2,7 +2,7 @@ function clk(a)
     {
     	if(a=="t1")
     	{
-    		document.getElementById(a).style.zIndex = "1";
+    		document.getElementById('t1').style.zIndex = "1";
     		document.getElementById("t2").style.zIndex = "0";
     		document.getElementById("t1h2").style.backgroundColor= "#e4efff";
     		document.getElementById("t2h2").style.backgroundColor= "white";
@@ -11,13 +11,15 @@ function clk(a)
     	}
     	else if(a=="t2")
     	{
-    		document.getElementById(a).style.zIndex = "1";
+    		document.getElementById('t2').style.zIndex = "1";
     		document.getElementById("t1").style.zIndex = "0";
     		document.getElementById("t2h2").style.backgroundColor= "#e4efff";
     		document.getElementById("t1h2").style.backgroundColor= "white";
     		document.getElementById("tabb1").style.color= "#717171";
     		document.getElementById("tabb2").style.color= "#09569d";
     	}
+        //stateChange(state);
+
     };
 
     function display()

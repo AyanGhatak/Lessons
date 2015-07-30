@@ -2,20 +2,59 @@
 <html>
 	<head>
 		<title>BasicCSS</title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-		<script src="js/myScript.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+		<script src="../js/myScript.js"></script>
 	</head>
 <body>
 <?php
-	
-	
+	if(isset($_GET['id'])){
+		$id = $_GET['id'];
+	}
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "Subscribe";
 
-// define variables and set to empty values
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+	    die("Connection failed: " . mysqli_connect_error());
+	}
+	$sql = "SELECT * FROM Subscription";
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+	    // output data of each row
+	    while($row = mysqli_fetch_assoc($result)) {
+	    	if($row['id']== $id){
+	    		//echo "$row[name]";	
+	    		$name = $row['name'];
+	    		$email = $row['email'];
+	    		$mobile = $row['mobile'];
+	    		$sex = $row['sex'];
+	    		$interest = explode(" ",$row['interest']);
+	    		$country = $row['country'];
+	    		$state = $row['state'];
+	    		$address = $row['address'];
+	    		//$arr = explode(" ",$interest);
+	    		//echo "$arr[1]";
+	    	}
+	        
+	    }
+	} else {
+	    echo "0 results";
+	}
+	mysqli_close($conn);
+
+
+	// define variables and set to empty values
 	$nameErr = $emailErr = $mobileErr = $sexErr = $interestErr = $countryErr = $stateErr = $addressErr = "";
 	$flag = 1;
-	$name = $email = $mobile = $sex = $country = $state = $games = $movie = $readings = $sexMale = $sexFemale = $address = "";
-	$interest = array("","","","");
-	$interest[0] = $interest[1] = $interest[2] = "";
+	
+	//$name = $email = $mobile = $sex = $country = $state = $games = $movie = $readings = $sexMale = $sexFemale = $address = "";
+	//$interest = array("","","","");
+	//$interest[0] = $interest[1] = $interest[2] = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	   if (empty($_POST["name"])) {
@@ -106,8 +145,8 @@
 	   
 	
 		if($flag == 1){
-		echo "Thank you for subscribing our channel.";
-		    $servername = "localhost";
+		//echo "Thank you for subscribing our channel.";
+		$servername = "localhost";
 		$username = "root";
 		$password = "";
 		$dbname = "Subscribe";
@@ -126,13 +165,71 @@
 		    die("Connection failed: " . mysqli_connect_error());
 		}
 		$intrst = implode(" ",$interest);
-		$sql = "INSERT INTO Subscription(name, email, mobile, sex, interest, country, state, address) VALUES ('$name', '$email', '$mobile', '$sex', '$intrst', '$country', '$state', '$address')";
+		/*$sql = "INSERT INTO Subscription(name, email, mobile, sex, interest, country, state, address) VALUES ('$name', '$email', '$mobile', '$sex', '$intrst', '$country', '$state', '$address')";
 
 		if (mysqli_query($conn, $sql)) {
 		    echo "New record created successfully";
 		} else {
 		    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}*/
+
+		$sql = "UPDATE Subscription SET name='$name' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
 		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+		$sql = "UPDATE Subscription SET email='$email' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
+		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+		$sql = "UPDATE Subscription SET mobile='$mobile' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
+		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+		$sql = "UPDATE Subscription SET sex='$sex' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
+		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+		$sql = "UPDATE Subscription SET interest='$intrst' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
+		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+		$sql = "UPDATE Subscription SET country='$country' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
+		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+		$sql = "UPDATE Subscription SET state='$state' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
+		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+		$sql = "UPDATE Subscription SET address='$address' WHERE id=$id";
+		if (mysqli_query($conn, $sql)) {
+	    	echo "Record updated successfully";
+		}
+		else {
+	    	//echo "Error updating record: " . mysqli_error($conn);
+		}
+
 
 		mysqli_close($conn);
 
@@ -157,6 +254,8 @@
 			$name = $email = $mobile = $sex = $country = $state = $games = $movie = $readings = $sexMale = $sexFemale = $address = "";
 			$interest = array("","","","");
 			$interest[0] = $interest[1] = $interest[2] = "";
+
+			header('Location: index.php');
 		
 		}
      }
@@ -172,31 +271,9 @@
 	
 	
 ?>
+<script type='text/javascript'>clk('t2');</script>
 <div class="tabs">
 
-	<div class="tab1" id="t1">
-		<h2 id="t1h2" onclick="clk('t1');"><a href="#" ><span id="tabb1">News</span></a></h2>
-
-		<div class="con1">
-			<p class="p_h1">Welcome </p>
-
-			<p class="p_h2"> 
-			Simple and effective AngularJS bindings for FusionCharts JavaScript Chariting Library.Simple and effective AngularJS bindings for FusionCharts JavaScript Chariting Library. simple and effective.
-			</p>		
-
-			<p class="p_h3">
-			AngularJS bindings for FusionCharts JavaScript Chariting Library.
-			</p>
-		</div> 
-
-		<div class="con2"><p class="head">Latest News</p>
-			<div class="image"><img src="image.jpg" alt="Image Preview"></div>
-		</div>
-
-		<a href="#"><div class="learn">LEARN MORE</div></a>
-
-	</div>
-	
 	<div class="tab2" id="t2">
 		<h2 id="t2h2" onclick="clk('t2');"><a href="#"><span id="tabb2">Subscribe</span></a></h2>
 		<div class="wrap">
@@ -223,8 +300,8 @@
 					<tr>
 						<td><span>Interest</span><span class="error" value="<?php echo $error;?>">* <?php echo $interestErr;?></span></td>
 						<td>
-							<input type="checkbox" name="interest[]" value="Games" id="cb1"  <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Games'){echo "checked";}} ?>>&nbsp<span>Games</span>&nbsp
-	  						<input type="checkbox" name="interest[]" value="Movie" id="cb2" ' <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Movie'){echo "checked";}} ?>>&nbsp<span>Movie</span>&nbsp
+							<input type="checkbox" name="interest[]" value="Games" id="cb1"  <?php $arrlength = count($interest); for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Games'){echo "checked";}} ?>>&nbsp<span>Games </span>&nbsp
+	  						<input type="checkbox" name="interest[]" value="Movie" id="cb2" ' <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Movie'){echo "checked";}} ?> > &nbsp<span> Movie </span>&nbsp
 	  						<input type="checkbox" name="interest[]" value="Reading" id="cb3" ' <?php $arrlength = count($interest);for($x = 0; $x < $arrlength; $x++){ if($interest[$x] == 'Reading'){echo "checked";}} ?>>&nbsp<span>Reading</span>
   						</td>
 					</tr>
@@ -284,30 +361,9 @@
 
 </div>
 
-<div id="overlay">
-     <div>
-          <p id="cb1_sub"> 
-          	Games Type:<?php echo $address;?><br/><br/>               	
-	        <input type="checkbox" name="games" id="cb1_sub_1" value="Indoor"/><span>Indoor</span>&nbsp&nbsp      
-	        <input type="checkbox" name="games" id="cb1_sub_2" value="Outdoor"/><span>Outdoor</span> &nbsp&nbsp        
-          </p>
-
-          <p id="cb2_sub">  
-          	Movie Type:<br/><br/>     
-	        <input type="checkbox" name="movie" id="cb2_sub_1" value="Horror"/><span>Horror</span>&nbsp&nbsp	
-	        <input type="checkbox" name="movie" id="cb2_sub_2" value="Comedy"/><span>Comedy</span>&nbsp&nbsp	
-	        <input type="checkbox" name="movie" id="cb2_sub_3" value="Drama"/><span>Drama</span>&nbsp&nbsp	
-          </p>
-
-           <p id="cb3_sub">
-           	Reading Type:<br/><br/>
-	        <input type="checkbox" name="readings" id="cb3_sub_1" value="Novel"/><span>Novel</span>&nbsp&nbsp	
-	        <input type="checkbox" name="readings" id="cb3_sub_2" value="Fiction"/><span>Fiction</span> &nbsp&nbsp	
-	        <input type="checkbox" name="readings" id="cb3_sub_3" value="Biography"/><span>Biography</span>&nbsp&nbsp
-          </p>
-          <p><input type="button" onclick="overlay()" value="Ok"></p>
-     </div>
-</div>
 </form>
 </body>
+<script type='text/javascript'>clk('t2');</script>
+
+
 </html>

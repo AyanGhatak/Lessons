@@ -1,3 +1,4 @@
+
 	@font-face {
 	   font-family: OpenSans-Semibold;
 	   src: url(fonts/OpenSans-Semibold.ttf);
@@ -34,7 +35,7 @@
 		position: absolute;
 		display: inline-block;
 		top: 1.8em;
-		height: 25em;
+		height: 22em;
 		width: 55em;
 		left: 0;
 		padding: 10px 0px 10px 0px ;
@@ -90,7 +91,6 @@
 	{
 		width: 47%;
 		height: 18em;
-		top : 3em;
 		float: left;
 		border: 1px solid #A5BBE4;
 		border-radius: 7px;
@@ -136,7 +136,7 @@
 	{
 		position: absolute;	
 		left: 9.2em;
-		top: 21em;
+		top: 18.5em;
 		width: 10em;
 		height: 2em;
 		text-align: center;
@@ -204,7 +204,7 @@
 		background-color: #ffffff;
 		position: absolute;
 		width: 96%;
-		height: 22.5em;
+		height: 19em;
 		float: left;
 		border: 1px solid #A5BBE4;
 		border-radius: 7px;
@@ -234,7 +234,7 @@
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
 		position: absolute;
-		top: 19em;
+		top: 16em;
 		width: 6em;
 		height: 2em;
 		text-align: center;
