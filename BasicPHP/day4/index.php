@@ -94,7 +94,7 @@
 					</tr>
 				</table>
 			</div>
-			<input type="button" class="button" onclick="subscribe()" value="SUBSCRIBE">
+			<input type="button" class="button" onclick="subscribe()" value="SUBSCRIBE" id="submit">
 			<input type="reset" name="reset" value="RESET" class="button" id="reset" onclick="clearSelect();" ></input>
 		</div>
 		

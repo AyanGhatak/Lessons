@@ -233,8 +233,9 @@
 	{
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
-		position: absolute;
-		top: 16em;
+		position: relative;
+		top: 12em;
+		left: 33em;
 		width: 6em;
 		height: 2em;
 		text-align: center;
