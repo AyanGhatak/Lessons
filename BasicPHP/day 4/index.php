@@ -59,8 +59,8 @@
 						<td><span>Interest</span><span id="interestErr" class="error">* </span></td>
 						<td>
 							<input type="checkbox" name="interest" value="Games" id="cb1"  >&nbsp<span>Games</span>&nbsp
-	  						<input type="checkbox" name="interest" value="Movie" id="cb2" ' >&nbsp<span>Movie</span>&nbsp
-	  						<input type="checkbox" name="interest" value="Reading" id="cb3" ' >&nbsp<span>Reading</span>
+	  						<input type="checkbox" name="interest" value="Movie" id="cb2" >&nbsp<span>Movie</span>&nbsp
+	  						<input type="checkbox" name="interest" value="Reading" id="cb3"  >&nbsp<span>Reading</span>
   						</td>
 					</tr>
 				</table>
